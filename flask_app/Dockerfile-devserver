@@ -1,0 +1,13 @@
+# ./flask_app/Dockerfile-devserver
+FROM python:3.8
+
+RUN pip install Flask requests &&\
+    pip install -I requests==2.28.1
+
+COPY app.py /app.py
+
+ENV FLASK_APP=app
+
+CMD flask run --no-reload \
+  --$THREADS-threads \
+  --host 0.0.0.0 --port $PORT_APP
